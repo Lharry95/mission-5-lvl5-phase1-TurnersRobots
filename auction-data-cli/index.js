@@ -15,10 +15,15 @@ try {
 }
 
 const addAuction = async (auction) => {
-  await AuctionData.create(auction).then((auction) => {
-    console.log("New Auction Added");
+  try {
+    await AuctionData.create(auction).then((auction) => {
+      console.log("New Auction Added");
+    });
+  } catch (error) {
+    console.error("Sorry! Couldn't add the auction", error);
+  } finally {
     mongoose.connection.close();
-  });
+  }
 };
 
 const findAuction = async (title) => {
@@ -28,9 +33,10 @@ const findAuction = async (title) => {
     const auctions = await AuctionData.find({ title: search });
     console.log(auctions);
     console.log(`${auctions.length} matches`);
-    mongoose.connection.close();
   } catch (error) {
     console.error("Uh oh, can't find the Auction", error);
+  } finally {
+    mongoose.connection.close();
   }
 };
 
@@ -38,10 +44,11 @@ const updateAuction = async (_id, auction) => {
   try {
     AuctionData.updateOne({ _id }, auction).then((auction) => {
       console.log("Auction updated");
-      mongoose.connection.close();
     });
   } catch (error) {
     console.error("Sorry couldn't update this!", error);
+  } finally {
+    mongoose.connection.close();
   }
 };
 
@@ -49,10 +56,11 @@ const deleteAuction = async (_id) => {
   try {
     AuctionData.deleteOne({ _id }).then((auction) => {
       console.log("Auction removed");
-      mongoose.connection.close();
     });
   } catch (error) {
     console.error("Auction wasn't removed, something went wrong", error);
+  } finally {
+    mongoose.connection.close();
   }
 };
 
@@ -72,10 +80,11 @@ const listAuctions = async () => {
     AuctionData.find().then((auctions) => {
       console.log(auctions);
       console.log(`${auctions.length} Auctions`);
-      mongoose.connection.close();
     });
   } catch (error) {
     console.error("Couldn't find the Auction List", error);
+  } finally {
+    mongoose.connection.close();
   }
 };
 
@@ -83,10 +92,11 @@ const seedAuctions = async () => {
   try {
     AuctionData.insertMany(seedData).then((auctions) => {
       console.log("All auctions seeded successfully to MongoDB");
-      mongoose.connection.close();
     });
   } catch (error) {
     console.error("Something went wrong. Couldn't seed data!", error);
+  } finally {
+    mongoose.connection.close();
   }
 };
 
