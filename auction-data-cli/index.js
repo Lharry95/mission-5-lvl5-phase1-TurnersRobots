@@ -14,6 +14,7 @@ try {
   process.exit(1);
 }
 
+// to add an auction
 const addAuction = async (auction) => {
   try {
     await AuctionData.create(auction).then((auction) => {
@@ -26,6 +27,7 @@ const addAuction = async (auction) => {
   }
 };
 
+// to find a specific auction using any word in the title or the whole title.
 const findAuction = async (title) => {
   // make case insensitive
   const search = new RegExp(title, "i");
@@ -40,6 +42,7 @@ const findAuction = async (title) => {
   }
 };
 
+// update an auction
 const updateAuction = async (_id, auction) => {
   try {
     AuctionData.updateOne({ _id }, auction).then((auction) => {
@@ -52,6 +55,7 @@ const updateAuction = async (_id, auction) => {
   }
 };
 
+// delete one auction
 const deleteAuction = async (_id) => {
   try {
     AuctionData.deleteOne({ _id }).then((auction) => {
@@ -64,6 +68,7 @@ const deleteAuction = async (_id) => {
   }
 };
 
+// delete all the auctions
 const deleteAll = async () => {
   try {
     AuctionData.deleteMany().then((auctions) => {
@@ -75,6 +80,7 @@ const deleteAll = async () => {
   }
 };
 
+// list all the auctions in the list
 const listAuctions = async () => {
   try {
     AuctionData.find().then((auctions) => {
@@ -88,6 +94,7 @@ const listAuctions = async () => {
   }
 };
 
+// seed all the auctions in seedData.js to mongoDB
 const seedAuctions = async () => {
   try {
     AuctionData.insertMany(seedData).then((auctions) => {

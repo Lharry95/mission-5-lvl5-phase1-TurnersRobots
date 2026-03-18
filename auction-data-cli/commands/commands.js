@@ -42,6 +42,7 @@ program
 program
   .command("update <_id>")
   .description("Update auction")
+  // using the id to update the auction
   .action((_id) => {
     prompt(questions).then((answers) => updateAuction(_id, answers));
   });

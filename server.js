@@ -24,7 +24,7 @@ app.get("/auctions", async (req, res) => {
   }
 });
 
-// search function
+// search using keywords
 app.get("/auctions-item/search", async (req, res) => {
   const query = req.query.title;
 
