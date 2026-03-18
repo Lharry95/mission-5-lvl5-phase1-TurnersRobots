@@ -1,0 +1,21 @@
+{
+  "name": "auction-data-cli",
+  "version": "1.0.0",
+  "description": "auction-data-cli",
+  "main": "index.js",
+  "preferGlobal": true,
+  "bin": "./commands/commands.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "commander": "^14.0.3",
+    "conf": "^15.1.0",
+    "inquirer": "^13.3.2",
+    "mongoose": "^9.3.0"
+  }
+}
