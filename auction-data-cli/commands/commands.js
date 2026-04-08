@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { Command } from "commander";
-import {
+const { Command } = require("commander");
+const {
   addAuction,
   findAuction,
   updateAuction,
@@ -9,12 +9,12 @@ import {
   listAuctions,
   seedAuctions,
   deleteAll,
-} from "../index.js";
-import inquirer from "inquirer";
-import questions from "./prompts.js";
+  addItem,
+} = require("../index.js");
+const inquirer = require("inquirer").default;
+const { questionsForAuctions, questionsForItems } = require("./prompts.js");
 
 const program = new Command();
-const { prompt } = inquirer;
 
 program
   .name("auction-data-cli")
@@ -31,7 +31,9 @@ program
   .command("add")
   .description("Add a new auction listing")
   .action(() => {
-    prompt(questions).then((answers) => addAuction(answers));
+    inquirer
+      .prompt(questionsForAuctions)
+      .then((answers) => addAuction(answers));
   });
 
 program
@@ -44,7 +46,9 @@ program
   .description("Update auction")
   // using the id to update the auction
   .action((_id) => {
-    prompt(questions).then((answers) => updateAuction(_id, answers));
+    inquirer
+      .prompt(questionsForAuctions)
+      .then((answers) => updateAuction(_id, answers));
   });
 
 program
@@ -63,5 +67,13 @@ program
   .command("deleteAll")
   .description("Deleting all auctions from MongoDB")
   .action(() => deleteAll());
+
+// adding items
+program
+  .command("addItem")
+  .description("Add a new auction listing")
+  .action(() => {
+    inquirer.prompt(questionsForItems).then((answers) => addItem(answers));
+  });
 
 program.parse(process.argv);
