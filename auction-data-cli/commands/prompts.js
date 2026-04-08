@@ -1,5 +1,5 @@
-// prompts for cust
-const questions = [
+// prompts for Auction cust
+const questionsForAuctions = [
   {
     type: "input",
     name: "title",
@@ -21,5 +21,28 @@ const questions = [
     message: "reserve_price:",
   },
 ];
+// prompts for cust
+const questionsForItems = [
+  {
+    type: "input",
+    name: "condition",
+    message: "condition:",
+  },
+  {
+    type: "input",
+    name: "dimensions",
+    message: "dimensions:",
+  },
+  {
+    type: "input",
+    name: "shipping_and_pickup",
+    message: "shipping_and_pickup:",
+  },
+  {
+    type: "input",
+    name: "payment_options",
+    message: "payment_options:",
+  },
+];
 
-export default questions;
+module.exports = { questionsForAuctions, questionsForItems };
